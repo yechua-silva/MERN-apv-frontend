@@ -69,7 +69,7 @@ const PacientesProvider = ({children}) => {
     }
 
     const eliminarPaciente = async (id) => {
-        const confirmar = confirm('Confirmas que desea eliminar el paciente?');
+        const confirmar = confirm('¿Confirmas que desea eliminar el paciente?');
 
         if (confirmar) {
             try {
@@ -84,6 +84,7 @@ const PacientesProvider = ({children}) => {
                 const { data } = await clienteAxios.delete(`/pacientes/${id}`, config);
 
                 const pacienteActualizado = pacientes.filter( pacienteState => pacienteState._id!== id)
+                setEdicion(pacienteActualizado);
             } catch (error) {
                 console.log(error);
             }
