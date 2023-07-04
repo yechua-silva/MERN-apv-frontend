@@ -39,7 +39,7 @@ const PacientesProvider = ({children}) => {
         const config = {
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
+                Authorization: `Bearer ${token}`
             }
         }
 
@@ -47,7 +47,6 @@ const PacientesProvider = ({children}) => {
             try {
                 const { data } = await clienteAxios.put(`/pacientes/${paciente.id}`, paciente, config);
                 const pacienteActualizado = pacientes.map( pacienteState => pacienteState._id === data._id ? data : pacienteState)
-                console.log(pacienteActualizado);
                 setPacientes(pacienteActualizado);
             } catch (error) {
                 console.log(error.response.data.msg);
@@ -77,19 +76,19 @@ const PacientesProvider = ({children}) => {
                 const config = {
                     headers: {
                         'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}`
+                        Authorization: `Bearer ${token}`
                     }
                 }
 
                 const { data } = await clienteAxios.delete(`/pacientes/${id}`, config);
 
-                const pacienteActualizado = pacientes.filter( pacienteState => pacienteState._id!== id)
-                setEdicion(pacienteActualizado);
+                const pacienteActualizado = pacientes.filter( pacienteState => pacienteState._id !== id)
+                setPacientes(pacienteActualizado);
             } catch (error) {
                 console.log(error);
             }
         }
-    }
+    }   
 
 
     return (
